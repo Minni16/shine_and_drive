@@ -112,9 +112,9 @@ else
                             <div class="price-footer">
                             <?php
                                 if (isset($_SESSION['alogin'])) {
-                                echo '<a class="btn btn-custom"  data-toggle="modal" data-target="#myModal">Book Now</a>';
+                                echo '<a class="btn btn-custom"  data-toggle="modal" data-target="#myModal">Get Now</a>';
                             } else {
-                                echo '<a href="../cwms/admin/index.php" class="btn btn-custom"   >Book Now</a>';
+                                echo '<a href="../cwms/admin/index.php" class="btn btn-custom"   >Get Now</a>';
                             }
                             ?>
                             </div>
@@ -138,9 +138,9 @@ else
                             <div class="price-footer">
                             <?php
                                 if (isset($_SESSION['alogin'])) {
-                                echo '<a class="btn btn-custom"  data-toggle="modal" data-target="#myModal">Book Now</a>';
+                                echo '<a class="btn btn-custom"  data-toggle="modal" data-target="#myModal">Get Now</a>';
                             } else {
-                                echo '<a href="../cwms/admin/index.php" class="btn btn-custom"   >Book Now</a>';
+                                echo '<a href="../cwms/admin/index.php" class="btn btn-custom"   >Get Now</a>';
                             }
                             ?>
                             </div>
@@ -164,9 +164,9 @@ else
                             <div class="price-footer">
                             <?php
                                 if (isset($_SESSION['alogin'])) {
-                                echo '<a class="btn btn-custom"  data-toggle="modal" data-target="#myModal">Book Now</a>';
+                                echo '<a class="btn btn-custom"  data-toggle="modal" data-target="#myModal">Get Now</a>';
                             } else {
-                                echo '<a href="../cwms/admin/index.php" class="btn btn-custom"   >Book Now</a>';
+                                echo '<a href="../cwms/admin/index.php" class="btn btn-custom"   >Get Now</a>';
                             }
                             ?>
                             </div>
@@ -215,7 +215,7 @@ foreach($results as $result)
             <p>Wash Date <br /><input type="date" name="washdate" required class="form-control"></p>
              <p>Wash Time <br /><input type="time" name="washtime" required class="form-control"></p>
              <p><textarea name="message"  class="form-control" placeholder="Message if any"></textarea></p>
-             <p><input type="submit" class="btn btn-custom" name="book" value="Book Now"></p>
+             <p><input type="submit" class="btn btn-custom" name="book" value="Get Now"></p>
       </form>
         </div>
         <div class="modal-footer">

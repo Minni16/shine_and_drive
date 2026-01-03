@@ -337,11 +337,11 @@ else
                             <div class="price-footer">
                                 <?php if (isset($_SESSION['alogin'])): ?>
                                     <a class="btn btn-custom btn-block" data-toggle="modal" data-target="#myModal" data-package="1" data-package-name="Basic Cleaning (Rs500)">
-                                        <i class="fas fa-calendar-check"></i> Book Now
+                                        <i class="fas fa-calendar-check"></i> Get Now
                                     </a>
                                 <?php else: ?>
                                     <a href="login.php" class="btn btn-custom btn-block">
-                                        <i class="fas fa-sign-in-alt"></i> Book Now
+                                        <i class="fas fa-sign-in-alt"></i> Get Now
                                     </a>
                                 <?php endif; ?>
                             </div>
@@ -366,21 +366,26 @@ else
                             <div class="price-body">
                                 <ul>
                                     <li><i class="fas fa-check-circle"></i> Everything in Basic</li>
-                                    <li><i class="fas fa-check-circle"></i> Interior vacuum (seats + floor)</li>
-                                    <li><i class="fas fa-check-circle"></i> Dashboard & console cleaning</li>
-                                    <li><i class="fas fa-check-circle"></i> Window & mirror cleaning (inside + outside)</li>
-                                    <li><i class="fas fa-check-circle"></i> Tire polish (shine shine ✨)</li>
-                                    <li><i class="fas fa-check-circle"></i> Light fragrance spray</li>
+                                    <li>
+                                        <span><i class="fas fa-check-circle"></i> Standard Care 1 x Month</span>
+                                        <ul class="sub-list">
+                                            <li><i class="fas fa-solid fa-plus"></i> Interior vacuum</li>
+                                            <li><i class="fas fa-solid fa-plus"></i> Dashboard & console cleaning</li>
+                                            <li><i class="fas fa-solid fa-plus"></i> Window & mirror cleaning</li>
+                                            <li><i class="fas fa-solid fa-plus"></i> Tire polish</li>
+                                            <li><i class="fas fa-solid fa-plus"></i> Light fragrance spray</li>
+                                        </ul>
+                                    </li>
                                 </ul>
                             </div>
                             <div class="price-footer">
                                 <?php if (isset($_SESSION['alogin'])): ?>
                                     <a class="btn btn-custom btn-block featured-btn" data-toggle="modal" data-target="#myModal" data-package="2" data-package-name="Premium Cleaning (Rs1500)">
-                                        <i class="fas fa-calendar-check"></i> Book Now
+                                        <i class="fas fa-calendar-check"></i> Get Now
                                     </a>
                                 <?php else: ?>
                                     <a href="../cwms/admin/index.php" class="btn btn-custom btn-block featured-btn">
-                                        <i class="fas fa-sign-in-alt"></i> Book Now
+                                        <i class="fas fa-sign-in-alt"></i> Get Now
                                     </a>
                                 <?php endif; ?>
                             </div>
@@ -391,7 +396,7 @@ else
                     <div class="col-lg-4 col-md-6 mb-4">
                         <div class="price-item">
                             <div class="price-header">
-                                <h3>Ultimate Spa</h3>
+                                <h3>Premium Treatment</h3>
                                 <div class="price-amount">
                                     <span class="currency">Rs</span>
                                     <span class="amount">2500</span>
@@ -401,24 +406,30 @@ else
                             </div>
                             <div class="price-body">
                                 <ul>
-                                    <li><i class="fas fa-check-circle"></i> Everything in Premium</li>
-                                    <li><i class="fas fa-check-circle"></i> Deep interior cleaning (seats, corners, mats)</li>
-                                    <li><i class="fas fa-check-circle"></i> Seat shampoo / leather conditioning</li>
-                                    <li><i class="fas fa-check-circle"></i> Engine bay cleaning</li>
-                                    <li><i class="fas fa-check-circle"></i> Wax or polish coating (paint protection)</li>
-                                    <li><i class="fas fa-check-circle"></i> Scratch removal (minor)</li>
-                                    <li><i class="fas fa-check-circle"></i> AC vent cleaning</li>
-                                    <li><i class="fas fa-check-circle"></i> Anti-bacterial interior spray</li>
+                                    <li><i class="fas fa-check-circle"></i> Everything in Standard</li>
+                                    <li>
+                                        <span><i class="fas fa-check-circle"></i> Premium Treatment 1 x Month</span>
+                                        <ul class="sub-list">
+                                            <li><i class="fas fa-thin fa-plus"></i> Deep interior cleaning</li>
+                                            <li><i class="fas fa-solid fa-plus"></i> Seat shampoo / leather conditioning</li>
+                                            <li><i class="fas fa-solid fa-plus"></i> Engine bay cleaning</li>
+                                            <li><i class="fas fa-solid fa-plus"></i> Wax or polish coating</li>
+                                            <li><i class="fas fa-solid fa-plus"></i> Scratch removal</li>
+                                            <li><i class="fas fa-solid fa-plus"></i> AC vent cleaning</li>
+                                            <li><i class="fas fa-solid fa-plus"></i> Anti-bacterial interior spray</li>
+                                        </ul>
+                                    </li>
+                
                                 </ul>
                             </div>
                             <div class="price-footer">
                                 <?php if (isset($_SESSION['alogin'])): ?>
                                     <a class="btn btn-custom btn-block" data-toggle="modal" data-target="#myModal" data-package="3" data-package-name="Complex Cleaning (Rs2500)">
-                                        <i class="fas fa-calendar-check"></i> Book Now
+                                        <i class="fas fa-calendar-check"></i> Get Now
                                     </a>
                                 <?php else: ?>
                                     <a href="login.php" class="btn btn-custom btn-block">
-                                        <i class="fas fa-sign-in-alt"></i> Book Now
+                                        <i class="fas fa-sign-in-alt"></i> Get Now
                                     </a>
                                 <?php endif; ?>
                             </div>
@@ -430,7 +441,7 @@ else
         <!-- Price End -->
         
         <script>
-            // Auto-fill package type in modal when clicking Book Now
+            // Auto-fill package type in modal when clicking Get Now
             $(document).ready(function() {
                 $('[data-toggle="modal"][data-target="#myModal"]').on('click', function() {
                     var packageType = $(this).data('package');
@@ -520,7 +531,7 @@ else
                             
                             <div class="form-group text-center mt-4">
                                 <button type="submit" class="btn btn-custom btn-lg" name="book">
-                                <i class="fas fa-calendar-check" style="margin-right: 10px;"></i>Book Now
+                                <i class="fas fa-calendar-check" style="margin-right: 10px;"></i>Get Now
                                 </button>
                             </div>
                         </form>

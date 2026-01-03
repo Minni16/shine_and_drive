@@ -52,6 +52,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
     box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
 }
+.page-container {
+    height: auto !important;
+    min-height: 100%;
+}
+html, body {
+    overflow-y: auto !important;
+    height: auto !important;
+}
 		</style>
 
 <script type="text/JavaScript">
@@ -273,4 +281,3 @@ echo htmlentities($result->detail);
 
 </body>
 </html>
-<?php } ?>

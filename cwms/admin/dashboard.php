@@ -25,6 +25,16 @@ include('includes/auth-check.php');
 <!-- lined-icons -->
 <link rel="stylesheet" href="css/icon-font.min.css" type='text/css' />
 <!-- //lined-icons -->
+  <style>
+.page-container {
+    height: auto !important;
+    min-height: 100%;
+}
+html, body {
+    overflow-y: auto !important;
+    height: auto !important;
+}
+		</style>
 </head> 
 <body>
    <div class="page-container">
@@ -40,7 +50,7 @@ include('includes/auth-check.php');
 <!--four-grids here-->
 		<div class="four-grids">
 
-			<a href="all-bookings.php" target="_blank">
+			<a href="all-bookings.php">
 					<div class="col-md-3 four-grid">
 						<div class="four-agileits">
 							<div class="icon">
@@ -62,7 +72,7 @@ $cnt=$query->rowCount();
 						</div>
 					</div>
 				</a>
-<a href="new-booking.php" target="_blank">
+<a href="new-booking.php">
 					<div class="col-md-3 four-grid">
 						<div class="four-agileinfo">
 							<div class="icon">
@@ -83,7 +93,7 @@ $newbookings=$query1->rowCount();
 						</div>
 					</div>
 				</a>
-		<a href="completed-booking.php" target="_blank">
+		<a href="completed-booking.php">
 					<div class="col-md-3 four-grid">
 						<div class="four-wthree">
 							<div class="icon">
@@ -104,7 +114,7 @@ $completedbookings=$query3->rowCount();
 						</div>
 					</div>
 </a>
-	<a href="manage-enquires.php" target="_blank">
+	<a href="manage-enquires.php">
 			<div class="col-md-3 four-grid">
 						<div class="four-w3ls">
 							<div class="icon">
@@ -130,7 +140,7 @@ $cnt2=$query2->rowCount();
 				</div>
 
 		<div class="four-grids">
-			<a href="managecar-washingpoints.php" target="_blank">
+			<a href="managecar-washingpoints.php">
 					<div class="col-md-3 four-grid">
 						<div class="four-w3ls">
 							<div class="icon">

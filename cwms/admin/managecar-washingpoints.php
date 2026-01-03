@@ -72,6 +72,16 @@ $query->execute();
 <!-- lined-icons -->
 <link rel="stylesheet" href="css/icon-font.min.css" type='text/css' />
 <!-- //lined-icons -->
+  <style>
+.page-container {
+    height: auto !important;
+    min-height: 100%;
+}
+html, body {
+    overflow-y: auto !important;
+    height: auto !important;
+}
+		</style>
 </head> 
 <body>
    <div class="page-container">
@@ -126,7 +136,6 @@ foreach($results as $result)
 						</tbody>
 					  </table>
 					</div>
-				  </table>
 
 				
 			</div>
@@ -190,4 +199,3 @@ foreach($results as $result)
 
 </body>
 </html>
-<?php } ?>

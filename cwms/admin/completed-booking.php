@@ -73,6 +73,14 @@ include('includes/auth-check.php');
     -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
     box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
 }
+.page-container {
+    height: auto !important;
+    min-height: 100%;
+}
+html, body {
+    overflow-y: auto !important;
+    height: auto !important;
+}
 		</style>
 </head> 
 <body>
@@ -152,7 +160,6 @@ if($ptype==3): echo "COMPLEX CLEANING (Rs 2500)";endif;
 						</tbody>
 					  </table>
 					</div>
-				  </table>
 
 				
 			</div>
@@ -216,4 +223,3 @@ if($ptype==3): echo "COMPLEX CLEANING (Rs 2500)";endif;
 
 </body>
 </html>
-<?php } ?>
