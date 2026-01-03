@@ -132,9 +132,9 @@ foreach($results as $result)
 							<td><?php echo htmlentities($result->fullName);?></td>
 								<td width="50">
 								<?php $ptype=$result->packageType;
-if($ptype==1): echo "BASIC CLEANING (Rs 500)";endif;
-if($ptype==2): echo "PREMIUM CLEANING (Rs 1500)";endif;
-if($ptype==3): echo "COMPLEX CLEANING (Rs 2500)";endif;
+if($ptype==1): echo "BASIC CLEANING (Rs 2000/month)";endif;
+if($ptype==2): echo "PREMIUM CLEANING (Rs 3000/month)";endif;
+if($ptype==3): echo "COMPLEX CLEANING (Rs 4500/month)";endif;
 
 
 							?></td>

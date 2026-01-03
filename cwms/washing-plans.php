@@ -1,4 +1,5 @@
 <?php //error_reporting(0);
+session_start();
 include('includes/config.php'); 
 
 if(isset($_POST['book']))
@@ -93,82 +94,128 @@ else
                     <p>Washing Plan</p>
                     <h2>Choose Your Plan</h2>
                 </div>
-                <div class="row">
-                    <div class="col-md-4">
+                <div class="row justify-content-center">
+                    <!-- Basic Cleaning Plan -->
+                    <div class="col-lg-4 col-md-6 mb-4">
                         <div class="price-item">
                             <div class="price-header">
-                                <h3>Basic Cleaning</h3>
-                                <h2><span>RS</span><strong>500</strong></h2>
+                                <h3>Basic Wash</h3>
+                                <div class="price-amount">
+                                    <span class="currency">Rs</span>
+                                    <span class="amount">2000</span>
+                                    <span class="currency">/month</span>
+                                </div>
+                                <p class="price-desc">Perfect for regular maintenance</p>
+                                <p class="price-desc">(15–20 minutes)</p>
                             </div>
                             <div class="price-body">
                                 <ul>
-                                    <li><i class="far fa-check-circle"></i>Seats Washing</li>
-                                    <li><i class="far fa-check-circle"></i>Vacuum Cleaning</li>
-                                    <li><i class="far fa-check-circle"></i>Exterior Cleaning</li>
-                                    <li><i class="far fa-times-circle"></i>Interior Wet Cleaning</li>
-                                    <li><i class="far fa-times-circle"></i>Window Wiping</li>
+                                    <li><i class="fas fa-check-circle"></i> Exterior water wash</li>
+                                    <li><i class="fas fa-check-circle"></i> Shampoo + rinse</li>
+                                    <li><i class="fas fa-check-circle"></i> Tire & rim wash</li>
+                                    <li><i class="fas fa-check-circle"></i> Basic air drying</li>
                                 </ul>
                             </div>
                             <div class="price-footer">
-                            <?php
-                                if (isset($_SESSION['alogin'])) {
-                                echo '<a class="btn btn-custom"  data-toggle="modal" data-target="#myModal">Get Now</a>';
-                            } else {
-                                echo '<a href="../cwms/admin/index.php" class="btn btn-custom"   >Get Now</a>';
-                            }
-                            ?>
+                                <?php if (isset($_SESSION['alogin'])): ?>
+                                    <a href="user/basic-wash.php" class="btn btn-custom btn-block">
+                                        <i class="fas fa-calendar-check"></i> Get Now
+                                    </a>
+                                <?php else: ?>
+                                    <a href="login.php?redirect=user/basic-wash.php" class="btn btn-custom btn-block">
+                                        <i class="fas fa-sign-in-alt"></i> Get Now
+                                    </a>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    
+                    <!-- Premium Cleaning Plan (Featured) -->
+                    <div class="col-lg-4 col-md-6 mb-4">
                         <div class="price-item featured-item">
+                            <div class="popular-badge">
+                                <i class="fas fa-star"></i> Most Popular
+                            </div>
                             <div class="price-header">
-                                <h3>Premium Cleaning</h3>
-                                <h2><span>RS</span><strong>1500</strong></h2>
+                                <h3>Standard Care</h3>
+                                <div class="price-amount">
+                                    <span class="currency">Rs</span>
+                                    <span class="amount">3000</span>
+                                    <span class="currency">/month</span>
+                                </div>
+                                <p class="price-desc">Best value for complete care</p>
+                                <p class="price-desc">(35–45 minutes)</p>
                             </div>
                             <div class="price-body">
                                 <ul>
-                                    <li><i class="far fa-check-circle"></i>Seats Washing</li>
-                                    <li><i class="far fa-check-circle"></i>Vacuum Cleaning</li>
-                                    <li><i class="far fa-check-circle"></i>Exterior Cleaning</li>
-                                    <li><i class="far fa-check-circle"></i>Interior Wet Cleaning</li>
-                                    <li><i class="far fa-times-circle"></i>Window Wiping</li>
+                                    <li><i class="fas fa-check-circle"></i> Everything in Basic</li>
+                                    <li>
+                                        <span><i class="fas fa-check-circle"></i> Standard Care 1 x Month</span>
+                                        <ul class="sub-list">
+                                            <li><i class="fas fa-solid fa-plus"></i> Interior vacuum</li>
+                                            <li><i class="fas fa-solid fa-plus"></i> Dashboard & console cleaning</li>
+                                            <li><i class="fas fa-solid fa-plus"></i> Window & mirror cleaning</li>
+                                            <li><i class="fas fa-solid fa-plus"></i> Tire polish</li>
+                                            <li><i class="fas fa-solid fa-plus"></i> Light fragrance spray</li>
+                                        </ul>
+                                    </li>
                                 </ul>
                             </div>
                             <div class="price-footer">
-                            <?php
-                                if (isset($_SESSION['alogin'])) {
-                                echo '<a class="btn btn-custom"  data-toggle="modal" data-target="#myModal">Get Now</a>';
-                            } else {
-                                echo '<a href="../cwms/admin/index.php" class="btn btn-custom"   >Get Now</a>';
-                            }
-                            ?>
+                                <?php if (isset($_SESSION['alogin'])): ?>
+                                    <a href="user/standard-care.php" class="btn btn-custom btn-block featured-btn">
+                                        <i class="fas fa-calendar-check"></i> Get Now
+                                    </a>
+                                <?php else: ?>
+                                    <a href="login.php?redirect=user/standard-care.php" class="btn btn-custom btn-block featured-btn">
+                                        <i class="fas fa-sign-in-alt"></i> Get Now
+                                    </a>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    
+                    <!-- Complex Cleaning Plan -->
+                    <div class="col-lg-4 col-md-6 mb-4">
                         <div class="price-item">
                             <div class="price-header">
-                                <h3>Complex Cleaning</h3>
-                                <h2><span>RS</span><strong>2500</strong></h2>
+                                <h3>Premium Treatment</h3>
+                                <div class="price-amount">
+                                    <span class="currency">Rs</span>
+                                    <span class="amount">4500</span>
+                                    <span class="currency">/month</span>
+                                </div>
+                                <p class="price-desc">Ultimate comprehensive service</p>
+                                <p class="price-desc">(1.5–2 hours)</p>
                             </div>
                             <div class="price-body">
                                 <ul>
-                                    <li><i class="far fa-check-circle"></i>Seats Washing</li>
-                                    <li><i class="far fa-check-circle"></i>Vacuum Cleaning</li>
-                                    <li><i class="far fa-check-circle"></i>Exterior Cleaning</li>
-                                    <li><i class="far fa-check-circle"></i>Interior Wet Cleaning</li>
-                                    <li><i class="far fa-check-circle"></i>Window Wiping</li>
+                                    <li><i class="fas fa-check-circle"></i> Everything in Standard</li>
+                                    <li>
+                                        <span><i class="fas fa-check-circle"></i> Premium Treatment 1 x Month</span>
+                                        <ul class="sub-list">
+                                            <li><i class="fas fa-thin fa-plus"></i> Deep interior cleaning</li>
+                                            <li><i class="fas fa-solid fa-plus"></i> Seat shampoo / leather conditioning</li>
+                                            <li><i class="fas fa-solid fa-plus"></i> Engine bay cleaning</li>
+                                            <li><i class="fas fa-solid fa-plus"></i> Wax or polish coating</li>
+                                            <li><i class="fas fa-solid fa-plus"></i> Scratch removal</li>
+                                            <li><i class="fas fa-solid fa-plus"></i> AC vent cleaning</li>
+                                            <li><i class="fas fa-solid fa-plus"></i> Anti-bacterial interior spray</li>
+                                        </ul>
+                                    </li>
+                
                                 </ul>
                             </div>
                             <div class="price-footer">
-                            <?php
-                                if (isset($_SESSION['alogin'])) {
-                                echo '<a class="btn btn-custom"  data-toggle="modal" data-target="#myModal">Get Now</a>';
-                            } else {
-                                echo '<a href="../cwms/admin/index.php" class="btn btn-custom"   >Get Now</a>';
-                            }
-                            ?>
+                                <?php if (isset($_SESSION['alogin'])): ?>
+                                    <a href="user/premium-treatment.php" class="btn btn-custom btn-block">
+                                        <i class="fas fa-calendar-check"></i> Get Now
+                                    </a>
+                                <?php else: ?>
+                                    <a href="login.php?redirect=user/premium-treatment.php" class="btn btn-custom btn-block">
+                                        <i class="fas fa-sign-in-alt"></i> Get Now
+                                    </a>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
@@ -193,9 +240,9 @@ else
   <p>
             <select name="packagetype" required class="form-control">
                 <option value="">Package Type</option>
-                <option value="1">BASIC CLEANING (Rs500)</option>
-                 <option value="2">PREMIUM CLEANING (Rs1500)</option>
-                  <option value="3 ">COMPLEX CLEANING(Rs2500)</option>
+                <option value="1">BASIC CLEANING (Rs2000/month)</option>
+                 <option value="2">PREMIUM CLEANING (Rs3000/month)</option>
+                  <option value="3 ">COMPLEX CLEANING(Rs4500/month)</option>
               </select>
 
           <p>

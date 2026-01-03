@@ -33,7 +33,7 @@ Run this SQL script to create the necessary tables:
 ### 3. Package Payment Pages
 
 All three package pages have been updated:
-- `cwms/user/basic-wash.php` (Rs 500)
+- `cwms/user/basic-wash.php` (Rs 2000/month)
 - `cwms/user/standard-care.php` (Rs 1500)
 - `cwms/user/premium-treatment.php` (Rs 2500)
 

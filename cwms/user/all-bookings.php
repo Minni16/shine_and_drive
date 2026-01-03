@@ -273,7 +273,6 @@ include('includes/payment-check.php');
 						<thead>
 						  <tr>
 						  <th>Booking No.</th>
-							<th>Name</th>
 							<th width="200">Package Type</th>
 							<th>Washing Point</th>
 							<th>Washing Date/Time</th>
@@ -285,9 +284,21 @@ include('includes/payment-check.php');
 						<tbody>
 <?php 
 $username = $_SESSION['alogin'];
+// First, try to update existing bookings to match session username if they don't match
+// This handles the case where old bookings were created with a different name format
+$updateSql = "UPDATE tblcarwashbooking 
+              SET fullName = :username 
+              WHERE (LOWER(TRIM(fullName)) LIKE LOWER(CONCAT('%', TRIM(:username), '%'))
+                     OR LOWER(TRIM(:username)) LIKE LOWER(CONCAT('%', TRIM(fullName), '%')))
+              AND fullName != :username";
+$updateQuery = $dbh->prepare($updateSql);
+$updateQuery->bindParam(':username', $username, PDO::PARAM_STR);
+$updateQuery->execute();
+
+// Now fetch bookings matching the session username (case-insensitive)
 $sql = "SELECT *,tblcarwashbooking.id as bid from tblcarwashbooking
 join tblwashingpoints on tblwashingpoints.id=tblcarwashbooking.carWashPoint
-where tblcarwashbooking.fullName=:username
+where LOWER(TRIM(tblcarwashbooking.fullName)) = LOWER(TRIM(:username))
 ORDER BY tblcarwashbooking.postingDate DESC";
 $query = $dbh -> prepare($sql);
 $query->bindParam(':username', $username, PDO::PARAM_STR);
@@ -300,12 +311,12 @@ foreach($results as $result)
 {				?>		
 						  <tr>
 							<td><?php echo htmlentities($result->bookingId);?></td>
-							<td><?php echo htmlentities($result->fullName);?></td>
+							<!-- <td><?php echo htmlentities($result->fullName);?></td> -->
 								<td width="50">
 								<?php $ptype=$result->packageType;
-if($ptype==1): echo "BASIC CLEANING (Rs 500)";endif;
-if($ptype==2): echo "PREMIUM CLEANING (Rs 1500)";endif;
-if($ptype==3): echo "COMPLEX CLEANING (Rs 2500)";endif;
+if($ptype==1): echo "BASIC CLEANING (Rs 2000/month)";endif;
+if($ptype==2): echo "PREMIUM CLEANING (Rs 3000/month)";endif;
+if($ptype==3): echo "COMPLEX CLEANING (Rs 4500/month)";endif;
 
 
 							?></td>

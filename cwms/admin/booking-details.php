@@ -152,9 +152,9 @@ foreach($results as $result)
 							<th>Package Type</th>
 								<td>
 								<?php $ptype=$result->packageType;
-if($ptype==1): echo "BASIC CLEANING (Rs 500)";endif;
-if($ptype==2): echo "PREMIUM CLEANING (Rs 1500)";endif;
-if($ptype==3): echo "COMPLEX CLEANING (Rs 2500)";endif;
+if($ptype==1): echo "BASIC CLEANING (Rs 2000/month)";endif;
+if($ptype==2): echo "PREMIUM CLEANING (Rs 3000/month)";endif;
+if($ptype==3): echo "COMPLEX CLEANING (Rs 4500/month)";endif;
 
 
 							?></td>
@@ -176,7 +176,18 @@ if($ptype==3): echo "COMPLEX CLEANING (Rs 2500)";endif;
 							
 					<tr>
 								<th>Status</th>
-<td colspan="3"><?php echo htmlentities($result->status);?></td>
+<td colspan="3">
+									<?php 
+									$status = isset($result->status) ? $result->status : 'New';
+									if($status == 'Completed'): 
+										echo '<span style="color: green; font-weight: bold; font-size: 18px;">Completed</span>';
+									elseif($status == 'New'):
+										echo '<span style="color: orange; font-weight: bold; font-size: 18px;">Pending</span>';
+									else:
+										echo htmlentities($status);
+									endif;
+									?>
+								</td>
 							</tr>
 <?php if($result->adminRemark==''): ?>
 	<tr>

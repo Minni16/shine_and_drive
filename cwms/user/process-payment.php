@@ -11,9 +11,9 @@ if (isset($_POST['esewa_submit'])) {
     
     // Package details
     $packageDetails = [
-        1 => ['name' => 'Basic Wash', 'amount' => 500],
-        2 => ['name' => 'Standard Care', 'amount' => 1500],
-        3 => ['name' => 'Premium Treatment', 'amount' => 2500]
+        1 => ['name' => 'Basic Wash', 'amount' => 2000],
+        2 => ['name' => 'Standard Care', 'amount' => 3000],
+        3 => ['name' => 'Premium Treatment', 'amount' => 4500]
     ];
     
     if (!isset($packageDetails[$packageType])) {
@@ -65,11 +65,14 @@ if (isset($_GET['oid']) && isset($_GET['amt']) && isset($_GET['refId'])) {
     // Verify payment with eSewa (in production, use eSewa's verification API)
     // For now, we'll mark as completed
     
-    // Extract package type from order ID (format: PKG1_TXN123456)
+    // Extract package type from order ID (format: PKG1_timestamp_random)
     $packageType = 1; // Default
     if (strpos($oid, 'PKG1') !== false) $packageType = 1;
     elseif (strpos($oid, 'PKG2') !== false) $packageType = 2;
     elseif (strpos($oid, 'PKG3') !== false) $packageType = 3;
+    
+    // Log the callback for debugging (remove in production)
+    error_log("eSewa Callback - OID: $oid, Amount: $amt, RefId: $refId, User: $username");
     
     // Check if payment already processed
     $checkSql = "SELECT id FROM tbluserpayments WHERE transactionId = :oid AND paymentStatus = 'completed'";

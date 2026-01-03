@@ -3,6 +3,19 @@ session_start();
 error_reporting(0);
 include('includes/config.php');
 include('includes/auth-check.php');
+
+// Handle status update when Complete button is clicked
+if(isset($_GET['complete']) && isset($_GET['bid'])) {
+	$bid = $_GET['bid'];
+	$sql = "UPDATE tblcarwashbooking SET status='Completed' WHERE id=:bid";
+	$query = $dbh->prepare($sql);
+	$query->bindParam(':bid', $bid, PDO::PARAM_INT);
+	$query->execute();
+	
+	echo "<script>alert('Booking marked as Completed successfully');</script>";
+	echo "<script>window.location.href = 'all-bookings.php';</script>";
+	exit();
+}
 ?> 
 
 
@@ -81,6 +94,38 @@ html, body {
     overflow-y: auto !important;
     height: auto !important;
 }
+.btn-done {
+    display: inline-block;
+    padding: 8px 16px;
+    background: #5cb85c;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+.btn-done:hover {
+    background: #4cae4c;
+    color: #fff;
+    text-decoration: none;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+.btn-completed {
+    display: inline-block;
+    padding: 8px 16px;
+    background: #6c757d;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: default;
+    opacity: 0.8;
+}
 		</style>
 </head> 
 <body>
@@ -131,9 +176,9 @@ foreach($results as $result)
 							<td><?php echo htmlentities($result->fullName);?></td>
 								<td width="50">
 								<?php $ptype=$result->packageType;
-if($ptype==1): echo "BASIC CLEANING (Rs 500)";endif;
-if($ptype==2): echo "PREMIUM CLEANING (Rs 1500)";endif;
-if($ptype==3): echo "COMPLEX CLEANING (Rs 2500)";endif;
+if($ptype==1): echo "BASIC CLEANING (Rs 2000/month)";endif;
+if($ptype==2): echo "PREMIUM CLEANING (Rs 3000/month)";endif;
+if($ptype==3): echo "COMPLEX CLEANING (Rs 4500/month)";endif;
 
 
 							?></td>
@@ -146,10 +191,17 @@ if($ptype==3): echo "COMPLEX CLEANING (Rs 2500)";endif;
 								<td><?php echo htmlentities($result->postingDate);?></td>
 				
 
-<td><a href="booking-details.php?bid=<?php echo htmlentities($result->bid);?>&&bookingid=<?php echo htmlentities($result->bookingId);?>">View</a>
+<td>
+	<?php 
+	$status = isset($result->status) ? $result->status : 'New';
+	if($status == 'Completed'): ?>
+		<span class="btn-completed">Completed</span>
+	<?php else: ?>
+		<a href="all-bookings.php?complete=1&bid=<?php echo htmlentities($result->bid);?>" class="btn-done" onclick="return confirm('Are you sure you want to mark this booking as Completed?');">Complete</a>
+	<?php endif; ?>	
 </td>
+						  </tr>
 <?php } ?>
-</tr>
 						 <?php } else { ?>
 						 	<tr>
 						 		<td colspan="6" style="color:red;">No Record found</td>

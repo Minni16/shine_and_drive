@@ -114,9 +114,9 @@ html, body {
 									<div class="col-sm-8">
 								 <select name="packagetype" required class="form-control">
                 <option value="">Package Type</option>
-                <option value="1">BASIC CLEANING (Rs 500)</option>
-                 <option value="2">PREMIUM CLEANING (Rs 1500)</option>
-                  <option value="3 ">COMPLEX CLEANING(Rs 2500)</option>
+                <option value="1">BASIC CLEANING (Rs 2000/month)</option>
+                 <option value="2">PREMIUM CLEANING (Rs 3000/month)</option>
+                  <option value="3 ">COMPLEX CLEANING(Rs 4500/month)</option>
               </select>
 									</div>
 								</div>

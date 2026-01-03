@@ -108,9 +108,9 @@ foreach($results as $result)
 							<th>Package Type</th>
 								<td>
 								<?php $ptype=$result->packageType;
-if($ptype==1): echo "BASIC CLEANING (Rs 500)";endif;
-if($ptype==2): echo "PREMIUM CLEANING (Rs 1500)";endif;
-if($ptype==3): echo "COMPLEX CLEANING (Rs 2500)";endif;
+if($ptype==1): echo "BASIC CLEANING (Rs 2000/month)";endif;
+if($ptype==2): echo "PREMIUM CLEANING (Rs 3000/month)";endif;
+if($ptype==3): echo "COMPLEX CLEANING (Rs 4500/month)";endif;
 							?></td>
 							
 						<th>Washing Point</th>
@@ -124,7 +124,7 @@ if($ptype==3): echo "COMPLEX CLEANING (Rs 2500)";endif;
 							<td><?php echo htmlentities($result->washTime);?></td>
 							</tr>
 							<tr>
-								<th>Message (if Any)</th>
+								<th>Message (if Any)	</th>
 <td colspan="3"><?php echo htmlentities($result->message);?></td>
 							</tr>
 							
@@ -134,7 +134,7 @@ if($ptype==3): echo "COMPLEX CLEANING (Rs 2500)";endif;
                                     <?php 
                                     $status = $result->status;
                                     if($status == 'New'): 
-                                        echo '<span style="color: orange; font-weight: bold; font-size: 18px;">New</span>';
+                                        echo '<span style="color: orange; font-weight: bold; font-size: 18px;">Pending</span>';
                                     elseif($status == 'Completed'):
                                         echo '<span style="color: green; font-weight: bold; font-size: 18px;">Completed</span>';
                                     else:

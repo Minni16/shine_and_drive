@@ -124,7 +124,7 @@ html, body {
 							<th width="200">Name</th>
 							<th>Email</th>
 							<th>Subject </th>
-							<th>Description </th>
+							<th>Message </th>
 							<th width="200">Posting date </th>
 							<th>Action </th>
 							

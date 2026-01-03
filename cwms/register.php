@@ -10,30 +10,83 @@ if ($conn->connect_error) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $email = trim($_POST['username']);
+    $username = trim($_POST['username']);
     $pass = trim($_POST['password']);
+    $fullName = trim($_POST['fullname']);
+    $email = trim($_POST['email']);
+    $phoneNumber = trim($_POST['phonenumber']);
     $encrypted = md5($pass); // Using MD5 (Not Recommended)
 
-    // Check if the email is already registered
+    // Check if the username is already registered
     $stmt = $conn->prepare("SELECT * FROM admin WHERE UserName=?");
-    $stmt->bind_param("s", $email);
+    $stmt->bind_param("s", $username);
     $stmt->execute();
     $query = $stmt->get_result();
 
     if ($query->num_rows > 0) {
         echo '<script>alert("Username already used!!");</script>';
     } else {
+        // Check if email is already registered (if email column exists)
+        $emailCheck = $conn->prepare("SELECT * FROM admin WHERE email=?");
+        if ($emailCheck) {
+            $emailCheck->bind_param("s", $email);
+            $emailCheck->execute();
+            $emailResult = $emailCheck->get_result();
+            if ($emailResult->num_rows > 0) {
+                echo '<script>alert("Email already registered!!");</script>';
+                $emailCheck->close();
+                $stmt->close();
+                $conn->close();
+                exit;
+            }
+            $emailCheck->close();
+        }
+        
         // Register as regular user (not admin)
         $userRole = 'user';
-        $stmt = $conn->prepare("INSERT INTO admin (UserName, Password, role) VALUES (?, ?, ?)");
-        $stmt->bind_param("sss", $email, $encrypted, $userRole);
-        if ($stmt->execute()) {
-            echo '<script>alert("You are registered as a regular user!!");</script>';
+        
+        // Try to insert with all fields (will work if columns exist)
+        $stmt = $conn->prepare("INSERT INTO admin (UserName, Password, role, fullName, email, phoneNumber) VALUES (?, ?, ?, ?, ?, ?)");
+        if ($stmt) {
+            $stmt->bind_param("ssssss", $username, $encrypted, $userRole, $fullName, $email, $phoneNumber);
+            if ($stmt->execute()) {
+                echo '<script>alert("Registration successful! You are registered as a regular user.");</script>';
+                echo '<script>window.location.href = "login.php";</script>';
+            } else {
+                // If columns don't exist, try without them
+                $stmt->close();
+                $stmt = $conn->prepare("INSERT INTO admin (UserName, Password, role) VALUES (?, ?, ?)");
+                if ($stmt) {
+                    $stmt->bind_param("sss", $username, $encrypted, $userRole);
+                    if ($stmt->execute()) {
+                        echo '<script>alert("Registration successful! Note: Please run the SQL migration file (add_user_info_columns.sql) to save full name, email, and phone number.");</script>';
+                        echo '<script>window.location.href = "login.php";</script>';
+                    } else {
+                        $errorMsg = htmlspecialchars($conn->error, ENT_QUOTES);
+                        echo '<script>alert("REGISTRATION FAILED: ' . $errorMsg . '");</script>';
+                    }
+                } else {
+                    echo '<script>alert("REGISTRATION FAILED: Could not prepare statement.");</script>';
+                }
+            }
         } else {
-            echo '<script>alert("REGISTRATION FAILED!!!");</script>';
+            // If prepare fails, try basic insert
+            $stmt = $conn->prepare("INSERT INTO admin (UserName, Password, role) VALUES (?, ?, ?)");
+            if ($stmt) {
+                $stmt->bind_param("sss", $username, $encrypted, $userRole);
+                if ($stmt->execute()) {
+                    echo '<script>alert("Registration successful! Note: Please run the SQL migration file (add_user_info_columns.sql) to save full name, email, and phone number.");</script>';
+                    echo '<script>window.location.href = "login.php";</script>';
+                } else {
+                    $errorMsg = htmlspecialchars($conn->error, ENT_QUOTES);
+                    echo '<script>alert("REGISTRATION FAILED: ' . $errorMsg . '");</script>';
+                }
+            } else {
+                echo '<script>alert("REGISTRATION FAILED: Could not prepare statement.");</script>';
+            }
         }
     }
-    $stmt->close();
+    if ($stmt) $stmt->close();
 }
 $conn->close();
 ?>
@@ -72,10 +125,13 @@ $conn->close();
             padding: 2.5rem;
             border-radius: 15px;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-            width: 350px;
+            width: 600px;
+            max-width: 95%;
             text-align: center;
             backdrop-filter: blur(10px); /* Keep the blur effect in the background */
             transition: transform 0.3s ease;
+            max-height: 90vh;
+            overflow-y: auto;
         }
 
         h2 {
@@ -88,8 +144,19 @@ $conn->close();
         }
 
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.2rem;
             text-align: left;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+            margin-bottom: 0;
         }
 
         label {
@@ -155,6 +222,15 @@ $conn->close();
             h2 {
                 font-size: 1.4rem;
             }
+
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .form-row .form-group {
+                margin-bottom: 1.2rem;
+            }
         }
     </style>
 </head>
@@ -163,9 +239,23 @@ $conn->close();
     <div class="container">
         <h2>Sign Up</h2>
         <form method="post" action="register.php">
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Full Name:</label>
+                    <input type="text" name="fullname" required placeholder="Enter your full name">
+                </div>
+                <div class="form-group">
+                    <label>Username:</label>
+                    <input type="text" name="username" required placeholder="Enter your username">
+                </div>
+            </div>
             <div class="form-group">
-                <label>Username:</label>
-                <input type="text" name="username" required placeholder="Enter your username">
+                <label>Email:</label>
+                <input type="email" name="email" required placeholder="Enter your email address">
+            </div>
+            <div class="form-group">
+                <label>Phone Number:</label>
+                <input type="tel" name="phonenumber" required pattern="[0-9]{10}" title="Enter 10-digit phone number" placeholder="Enter 10-digit phone number">
             </div>
             <div class="form-group">
                 <label>Password:</label>

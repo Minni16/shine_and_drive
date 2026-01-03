@@ -124,7 +124,7 @@ CREATE TABLE `tblpages` (
 
 INSERT INTO `tblpages` (`id`, `type`, `detail`, `openignHrs`, `phoneNumber`, `emailId`) VALUES
 (3, 'aboutus', '																				<div style=\"text-align: justify;\"><span style=\"color: rgb(131, 88, 88); font-family: Georgia; font-size: 15px;\">CAr Wash Management System is a brand which is literally going to change the way people think about car cleaning. It is a unique mechanized car cleaning concept where cars are getting pampered by the latest equipments including high pressure cleaning machines, spray injection and extraction machines, high powered vacuum cleaners, steam cleaners and so on.</span></div><div style=\"text-align: justify;\"><span style=\"color: rgb(31, 30, 30); font-family: Georgia; font-size: 15px;\"><br></span></div><div style=\"text-align: justify;\"><span style=\"color: rgb(177, 19, 19); font-family: Georgia; font-size: 15px;\">Car Wash&nbsp; Management System is a brand that is literally going to change the way people think about car cleaning. It is a unique mechanized car cleaning concept where cars are getting pampered by the latest equipments including high pressure cleaning machines, spray injection and extraction machines, high powered vacuum cleaners, steam cleaners and so on.&nbsp;</span><br></div><div></div>\r\n										\r\n										', NULL, NULL, NULL),
-(11, 'contact', 'Nepaltar, Kathmandu, Nepal', 'Mon - Fri, 8:00 AM - 9:00 PM', 1234567890, 'Thapacar@examp.com');
+(11, 'contact', 'Paknajol, Kathmandu, Nepal', 'Mon - Fri, 8:00 AM - 9:00 PM', 9861465033, 'shineanddrive@gmail.com');
 
 -- --------------------------------------------------------
 

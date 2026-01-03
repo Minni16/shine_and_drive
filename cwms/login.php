@@ -23,22 +23,30 @@ if (isset($_POST['login'])) {
             // Redirect based on role
             if (isset($result->role) && $result->role == 'admin') {
                 // Admin goes to admin dashboard
-                echo "<script type='text/javascript'> document.location = 'admin/dashboard.php'; </script>";
+                header("Location: admin/dashboard.php");
+                exit();
             } else {
-                // Regular users: redirect back to referring page or index.php
-                $redirect_url = 'index.php';
+                // Regular users: redirect to user dashboard or back to referring page
+                $redirect_url = 'user/dashboard.php';
                 if (isset($_SESSION['redirect_after_login']) && !empty($_SESSION['redirect_after_login'])) {
                     $redirect_url = $_SESSION['redirect_after_login'];
                     unset($_SESSION['redirect_after_login']);
                 } elseif (isset($_SERVER['HTTP_REFERER']) && !empty($_SERVER['HTTP_REFERER'])) {
                     // Extract the path from the referer URL
                     $referer = parse_url($_SERVER['HTTP_REFERER'], PHP_URL_PATH);
-                    // Only redirect to same domain pages
+                    // Only redirect to same domain pages, but prefer dashboard for logged-in users
                     if (strpos($referer, $_SERVER['HTTP_HOST']) !== false || strpos($referer, '/') === 0) {
-                        $redirect_url = basename($referer);
+                        $referer_file = basename($referer);
+                        // If coming from index or package pages, go to dashboard
+                        if (in_array($referer_file, ['index.php', 'washing-plans.php', 'login.php'])) {
+                            $redirect_url = 'user/dashboard.php';
+                        } else {
+                            $redirect_url = $referer_file;
+                        }
                     }
                 }
-                echo "<script type='text/javascript'> document.location = '" . htmlspecialchars($redirect_url, ENT_QUOTES) . "'; </script>";
+                header("Location: " . $redirect_url);
+                exit();
             }
         } else {
             echo "<script>alert('Invalid Details');</script>";
@@ -210,10 +218,7 @@ if (isset($_POST['login'])) {
         <div class="links">
             <a href="register.php">Create Account</a>
             <a href="index.php">Back to Home</a>
-        </div>
-        <div class="admin-link">
-            <a href="admin/index.php">Admin Login</a>
-        </div>
+        </div>      
     </div>
 
 </body>

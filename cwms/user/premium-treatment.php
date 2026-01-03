@@ -153,7 +153,7 @@ include('includes/auth-check.php');
                                 <div class="plan-header">
                                     <h2>Premium Treatment Plan</h2>
                                     <div class="plan-price">
-                                        <span>Rs</span> 2500
+                                        <span>Rs</span> 4500/month
                                     </div>
                                     <p style="color: #666; font-size: 16px;">Ultimate comprehensive service</p>
                                     <p style="color: #999; font-size: 14px;">(1.5–2 hours)</p>
@@ -178,51 +178,70 @@ include('includes/auth-check.php');
                                 <p style="color: #666; margin-bottom: 20px;">Pay securely using eSewa</p>
                                 
                                 <!-- eSewa Payment Form -->
+                                <?php
+                                // Construct proper callback URLs
+                                $protocol = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') ? "https" : "http";
+                                $host = $_SERVER['HTTP_HOST'];
+                                $basePath = str_replace('\\', '/', dirname(dirname($_SERVER['SCRIPT_NAME'])));
+                                $successUrl = $protocol . "://" . $host . $basePath . "/user/process-payment.php";
+                                $failureUrl = $protocol . "://" . $host . $basePath . "/user/premium-treatment.php";
+                                $productId = "PKG3_" . time() . "_" . rand(1000, 9999);
+                                ?>
                                 <form id="esewa-form" method="POST" action="https://uat.esewa.com.np/epay/main">
-                                    <input type="hidden" id="tAmt" name="tAmt" value="2500">
-                                    <input type="hidden" id="amt" name="amt" value="2500">
+                                    <input type="hidden" id="tAmt" name="tAmt" value="4500">
+                                    <input type="hidden" id="amt" name="amt" value="4500">
                                     <input type="hidden" id="txAmt" name="txAmt" value="0">
                                     <input type="hidden" id="psc" name="psc" value="0">
                                     <input type="hidden" id="pdc" name="pdc" value="0">
                                     <input type="hidden" id="scd" name="scd" value="EPAYTEST">
-                                    <input type="hidden" id="pid" name="pid" value="PKG3_<?php echo time(); ?>">
-                                    <input type="hidden" id="su" name="su" value="<?php echo (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://" . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']) . "/process-payment.php"; ?>">
-                                    <input type="hidden" id="fu" name="fu" value="<?php echo (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://" . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']) . "/premium-treatment.php"; ?>">
+                                    <input type="hidden" id="pid" name="pid" value="<?php echo htmlspecialchars($productId); ?>">
+                                    <input type="hidden" id="su" name="su" value="<?php echo htmlspecialchars($successUrl); ?>">
+                                    <input type="hidden" id="fu" name="fu" value="<?php echo htmlspecialchars($failureUrl); ?>">
                                     <input type="hidden" name="package_type" value="3">
-                                    <input type="hidden" name="package_amount" value="2500">
+                                    <input type="hidden" name="package_amount" value="4500">
                                     
                                     <div class="form-group">
                                         <label>Package Selected</label>
-                                        <input type="text" class="form-control" value="Premium Treatment - Rs 2500" readonly>
+                                        <input type="text" class="form-control" value="Premium Treatment - Rs 4500/month" readonly>
                                     </div>
                                     
                                     <div class="form-group">
                                         <label>Total Amount</label>
-                                        <input type="text" class="form-control" value="Rs 2500" readonly style="font-size: 24px; font-weight: bold; color: #667eea;">
+                                        <input type="text" class="form-control" value="Rs 4500" readonly style="font-size: 24px; font-weight: bold; color: #667eea;">
                                     </div>
                                     
                                     <div class="form-group text-center mt-4">
-                                        <button type="submit" class="btn-pay">
+                                        <button type="submit" class="btn-pay" onclick="return confirm('Note: eSewa UAT may not be accessible. If it fails, use the Test Mode button below.');">
                                             <i class="fa fa-lock"></i> Pay with eSewa
                                         </button>
                                         <p style="margin-top: 15px; font-size: 12px; color: #999;">
                                             <i class="fa fa-shield"></i> Secure payment powered by eSewa
                                         </p>
+                                        <p style="margin-top: 10px; font-size: 11px; color: #ff9800;">
+                                            <i class="fa fa-exclamation-triangle"></i> If eSewa is not accessible, use Test Mode below
+                                        </p>
                                     </div>
                                 </form>
                                 
                                 <!-- Alternative: Direct payment processing (for testing) -->
-                                <form method="post" action="process-payment.php" style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #eee;">
-                                    <input type="hidden" name="package_type" value="3">
-                                    <input type="hidden" name="amount" value="2500">
-                                    <input type="hidden" name="esewa_submit" value="1">
-                                    <div class="form-group text-center">
-                                        <button type="submit" class="btn-pay" style="background: #28a745;">
-                                            <i class="fa fa-check"></i> Complete Payment (Test Mode)
-                                        </button>
-                                        <p style="margin-top: 10px; font-size: 11px; color: #999;">Use this for testing without eSewa</p>
-                                    </div>
-                                </form>
+                                <div>
+                                    <!-- <h4 style="color: #28a745; margin-bottom: 15px; text-align: center;">
+                                        <i class="fa fa-flask"></i> Development/Testing Mode
+                                    </h4> -->
+                                    <form method="post" action="process-payment.php">
+                                        <input type="hidden" name="package_type" value="3">
+                                        <input type="hidden" name="amount" value="4500">
+                                        <input type="hidden" name="esewa_submit" value="1">
+                                        <div class="form-group text-center">
+                                            <button type="submit" class="btn-pay" style="background: #28a745; font-size: 16px;">
+                                                <i class="fa fa-check-circle"></i> Complete Payment (Test Mode - Recommended)
+                                            </button>
+                                            <!-- <p style="margin-top: 10px; font-size: 12px; color: #666;">
+                                                <i class="fa fa-info-circle"></i> This bypasses eSewa and directly processes payment. Perfect for development and testing.
+                                            </p> -->
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>

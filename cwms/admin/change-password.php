@@ -3,31 +3,58 @@ session_start();
 error_reporting(0);
 include('includes/config.php');
 include('includes/auth-check.php');
-?>
+
+// Initialize error and message variables
+$error = '';
+$msg = '';
+
 // Code for change password	
-if(isset($_POST['submit']))
-	{
-$password=md5($_POST['password']);
-$newpassword=md5($_POST['newpassword']);
-$username=$_SESSION['alogin'];
-	$sql ="SELECT Password FROM admin WHERE UserName=:username and Password=:password";
-$query= $dbh -> prepare($sql);
-$query-> bindParam(':username', $username, PDO::PARAM_STR);
-$query-> bindParam(':password', $password, PDO::PARAM_STR);
-$query-> execute();
-$results = $query -> fetchAll(PDO::FETCH_OBJ);
-if($query -> rowCount() > 0)
-{
-$con="update admin set Password=:newpassword where UserName=:username";
-$chngpwd1 = $dbh->prepare($con);
-$chngpwd1-> bindParam(':username', $username, PDO::PARAM_STR);
-$chngpwd1-> bindParam(':newpassword', $newpassword, PDO::PARAM_STR);
-$chngpwd1->execute();
-$msg="Your Password succesfully changed";
-}
-else {
-$error="Your current password is wrong";	
-}
+if(isset($_POST['submit'])) {
+	// Get form inputs and trim whitespace
+	$currentPassword = trim($_POST['password']);
+	$newPassword = trim($_POST['newpassword']);
+	$confirmPassword = trim($_POST['confirmpassword']);
+	$username = $_SESSION['alogin'];
+	
+	// Validation
+	if(empty($currentPassword)) {
+		$error = "Current password is required";
+	} elseif(empty($newPassword)) {
+		$error = "New password is required";
+	} elseif(strlen($newPassword) < 6) {
+		$error = "New password must be at least 6 characters long";
+	} elseif($newPassword !== $confirmPassword) {
+		$error = "New password and confirm password do not match";
+	} elseif($currentPassword === $newPassword) {
+		$error = "New password must be different from current password";
+	} else {
+		// Hash passwords using MD5 (for backward compatibility with existing system)
+		$password = md5($currentPassword);
+		$newpassword = md5($newPassword);
+		
+		// Verify current password
+		$sql = "SELECT Password FROM admin WHERE UserName=:username AND Password=:password";
+		$query = $dbh->prepare($sql);
+		$query->bindParam(':username', $username, PDO::PARAM_STR);
+		$query->bindParam(':password', $password, PDO::PARAM_STR);
+		$query->execute();
+		
+		if($query->rowCount() > 0) {
+			// Update password
+			$con = "UPDATE admin SET Password=:newpassword WHERE UserName=:username";
+			$chngpwd1 = $dbh->prepare($con);
+			$chngpwd1->bindParam(':username', $username, PDO::PARAM_STR);
+			$chngpwd1->bindParam(':newpassword', $newpassword, PDO::PARAM_STR);
+			
+			if($chngpwd1->execute()) {
+				$msg = "Your password successfully changed";
+			} else {
+				$error = "Failed to update password. Please try again.";
+			}
+		} else {
+			$error = "Your current password is wrong";
+		}
+	}
 }
 ?>
 

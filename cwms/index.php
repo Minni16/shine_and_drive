@@ -321,7 +321,8 @@ else
                                 <h3>Basic Wash</h3>
                                 <div class="price-amount">
                                     <span class="currency">Rs</span>
-                                    <span class="amount">500</span>
+                                    <span class="amount">2000</span>
+                                    <span class="currency">/month</span>
                                 </div>
                                 <p class="price-desc">Perfect for regular maintenance</p>
                                 <p class="price-desc">(15–20 minutes)</p>
@@ -340,7 +341,7 @@ else
                                         <i class="fas fa-calendar-check"></i> Get Now
                                     </a>
                                 <?php else: ?>
-                                    <a href="login.php?redirect=index.php" class="btn btn-custom btn-block">
+                                    <a href="login.php?redirect=user/basic-wash.php" class="btn btn-custom btn-block">
                                         <i class="fas fa-sign-in-alt"></i> Get Now
                                     </a>
                                 <?php endif; ?>
@@ -358,7 +359,8 @@ else
                                 <h3>Standard Care</h3>
                                 <div class="price-amount">
                                     <span class="currency">Rs</span>
-                                    <span class="amount">1500</span>
+                                    <span class="amount">3000</span>
+                                    <span class="currency">/month</span>
                                 </div>
                                 <p class="price-desc">Best value for complete care</p>
                                 <p class="price-desc">(35–45 minutes)</p>
@@ -384,7 +386,7 @@ else
                                         <i class="fas fa-calendar-check"></i> Get Now
                                     </a>
                                 <?php else: ?>
-                                    <a href="login.php?redirect=index.php" class="btn btn-custom btn-block featured-btn">
+                                    <a href="login.php?redirect=user/standard-care.php" class="btn btn-custom btn-block featured-btn">
                                         <i class="fas fa-sign-in-alt"></i> Get Now
                                     </a>
                                 <?php endif; ?>
@@ -399,7 +401,8 @@ else
                                 <h3>Premium Treatment</h3>
                                 <div class="price-amount">
                                     <span class="currency">Rs</span>
-                                    <span class="amount">2500</span>
+                                    <span class="amount">4500</span>
+                                    <span class="currency">/month</span>
                                 </div>
                                 <p class="price-desc">Ultimate comprehensive service</p>
                                 <p class="price-desc">(1.5–2 hours)</p>
@@ -428,7 +431,7 @@ else
                                         <i class="fas fa-calendar-check"></i> Get Now
                                     </a>
                                 <?php else: ?>
-                                    <a href="login.php?redirect=index.php" class="btn btn-custom btn-block">
+                                    <a href="login.php?redirect=user/premium-treatment.php" class="btn btn-custom btn-block">
                                         <i class="fas fa-sign-in-alt"></i> Get Now
                                     </a>
                                 <?php endif; ?>
@@ -475,9 +478,9 @@ else
                                 <label for="packagetype"><i class="fas fa-box"></i> Package Type <span class="text-danger">*</span></label>
                                 <select name="packagetype" id="packagetype" required class="form-control">
                                     <option value="">Select Package Type</option>
-                                    <option value="1">Basic Wash (Rs500)</option>
-                                    <option value="2">Standard Care (Rs1500)</option>
-                                    <option value="3">Premium Treatment (Rs2500)</option>
+                                    <option value="1">Basic Wash (Rs2000/month)</option>
+                                    <option value="2">Standard Care (Rs3000/month)</option>
+                                    <option value="3">Premium Treatment (Rs4500/month)</option>
                                 </select>
                             </div>
                             
@@ -531,7 +534,7 @@ else
                             
                             <div class="form-group text-center mt-4">
                                 <button type="submit" class="btn btn-custom btn-lg" name="book">
-                                <i class="fas fa-calendar-check" style="margin-right: 10px;"></i>Get Now
+                                <i class="fas fa-sign-in-alt" style="margin-right: 10px;"></i>Get Now
                                 </button>
                             </div>
                         </form>

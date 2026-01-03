@@ -185,7 +185,7 @@
 			</li>
 
 			<li>
-				<a style="cursor: pointer;" data-toggle="modal" data-target="#myModal">
+				<a href="dashboard.php?open_booking=1" id="new-booking-link">
 					<i class="fa fa-plus-circle"></i>
 					<span>New Booking</span>
 					<div class="clearfix"></div>
