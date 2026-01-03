@@ -14,18 +14,18 @@ include('includes/auth-check.php');
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>CWMS | Completed Bookings</title>
+<title>CWMS | My New Bookings</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-<link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' />
-<link href="css/style.css" rel='stylesheet' type='text/css' />
-<link rel="stylesheet" href="css/morris.css" type="text/css"/>
-<link href="css/font-awesome.css" rel="stylesheet"> 
-<script src="js/jquery-2.1.4.min.js"></script>
-<link rel="stylesheet" type="text/css" href="css/table-style.css" />
-<link rel="stylesheet" type="text/css" href="css/basictable.css" />
-<script type="text/javascript" src="js/jquery.basictable.min.js"></script>
+<link href="../admin/css/bootstrap.min.css" rel='stylesheet' type='text/css' />
+<link href="../admin/css/style.css" rel='stylesheet' type='text/css' />
+<link rel="stylesheet" href="../admin/css/morris.css" type="text/css"/>
+<link href="../admin/css/font-awesome.css" rel="stylesheet"> 
+<script src="../admin/js/jquery-2.1.4.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../admin/css/table-style.css" />
+<link rel="stylesheet" type="text/css" href="../admin/css/basictable.css" />
+<script type="text/javascript" src="../admin/js/jquery.basictable.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
       $('#table').basictable();
@@ -55,7 +55,7 @@ include('includes/auth-check.php');
 </script>
 <link href='//fonts.googleapis.com/css?family=Roboto:700,500,300,100italic,100,400' rel='stylesheet' type='text/css'/>
 <link href='//fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-<link rel="stylesheet" href="css/icon-font.min.css" type='text/css' />
+<link rel="stylesheet" href="../admin/css/icon-font.min.css" type='text/css' />
   <style>
 		.errorWrap {
     padding: 10px;
@@ -94,14 +94,14 @@ html, body {
 				</div>
 <!--heder end here-->
 <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="dashboard.php">Home</a><i class="fa fa-angle-right"></i>Manage Completed Bookings</li>
+                <li class="breadcrumb-item"><a href="dashboard.php">Home</a><i class="fa fa-angle-right"></i>My New Bookings</li>
             </ol>
 <div class="agile-grids">	
 				<!-- tables -->
 
 				<div class="agile-tables">
 					<div class="w3l-table-info">
-					  <h2>Completed Bookings</h2>
+					  <h2>My New Bookings</h2>
 					    <table id="table">
 						<thead>
 						  <tr>
@@ -116,10 +116,13 @@ html, body {
 						  </tr>
 						</thead>
 						<tbody>
-<?php $sql = "SELECT *,tblcarwashbooking.id as bid from tblcarwashbooking
+<?php 
+$username = $_SESSION['alogin'];
+$sql = "SELECT *,tblcarwashbooking.id as bid from tblcarwashbooking
 join tblwashingpoints on tblwashingpoints.id=tblcarwashbooking.carWashPoint
- where status='Completed'";
+ where status='New' AND tblcarwashbooking.fullName=:username";
 $query = $dbh -> prepare($sql);
+$query->bindParam(':username', $username, PDO::PARAM_STR);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
 
@@ -212,10 +215,10 @@ if($ptype==3): echo "COMPLEX CLEANING (Rs 2500)";endif;
 										});
 							</script>
 <!--js -->
-<script src="js/jquery.nicescroll.js"></script>
-<script src="js/scripts.js"></script>
+<script src="../admin/js/jquery.nicescroll.js"></script>
+<script src="../admin/js/scripts.js"></script>
 <!-- Bootstrap Core JavaScript -->
-   <script src="js/bootstrap.min.js"></script>
+   <script src="../admin/js/bootstrap.min.js"></script>
    <!-- /Bootstrap Core JavaScript -->	   
 
 </body>

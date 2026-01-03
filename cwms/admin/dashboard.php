@@ -171,8 +171,6 @@ $washingpoints=$query5->rowCount();
 
 </div>
 <!--inner block end here-->
-<!--copy rights start here-->
-<?php include('includes/footer.php');?>
 </div>
 </div>
 

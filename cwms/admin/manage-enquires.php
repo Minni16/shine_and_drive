@@ -3,21 +3,22 @@ session_start();
 error_reporting(0);
 include('includes/config.php');
 include('includes/auth-check.php');
-?> 
-	// code for cancel
+
+// code for cancel
 if(isset($_REQUEST['eid']))
-	{
-$eid=intval($_GET['eid']);
-$status=1;
+{
+	$eid=intval($_GET['eid']);
+	$status=1;
 
-$sql = "UPDATE tblenquiry SET Status=:status WHERE  id=:eid";
-$query = $dbh->prepare($sql);
-$query -> bindParam(':status',$status, PDO::PARAM_STR);
-$query-> bindParam(':eid',$eid, PDO::PARAM_STR);
-$query -> execute();
+	$sql = "UPDATE tblenquiry SET Status=:status WHERE  id=:eid";
+	$query = $dbh->prepare($sql);
+	$query -> bindParam(':status',$status, PDO::PARAM_STR);
+	$query-> bindParam(':eid',$eid, PDO::PARAM_STR);
+	$query -> execute();
 
-$msg="Enquiry  successfully read";
+	$msg="Enquiry  successfully read";
 }
+?>
 
 
 
@@ -187,9 +188,6 @@ foreach($results as $result)
 
 </div>
 <!--inner block end here-->
-<!--copy rights start here-->
-<?php include('includes/footer.php');?>
-<!--COPY rights end here-->
 </div>
 </div>
   <!--//content-inner-->

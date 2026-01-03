@@ -242,9 +242,6 @@ echo htmlentities($result->detail);
 
 </div>
 <!--inner block end here-->
-<!--copy rights start here-->
-<?php include('includes/footer.php');?>
-<!--COPY rights end here-->
 </div>
 </div>
   <!--//content-inner-->

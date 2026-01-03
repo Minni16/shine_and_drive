@@ -25,8 +25,8 @@ if (isset($_POST['login'])) {
                 // Admin goes to admin dashboard
                 echo "<script type='text/javascript'> document.location = 'admin/dashboard.php'; </script>";
             } else {
-                // Regular users go to homepage
-                echo "<script type='text/javascript'> document.location = 'index.php'; </script>";
+                // Regular users go to user dashboard
+                echo "<script type='text/javascript'> document.location = 'user/dashboard.php'; </script>";
             }
         } else {
             echo "<script>alert('Invalid Details');</script>";

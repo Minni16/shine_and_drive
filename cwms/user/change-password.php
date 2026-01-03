@@ -3,7 +3,7 @@ session_start();
 error_reporting(0);
 include('includes/config.php');
 include('includes/auth-check.php');
-?>
+
 // Code for change password	
 if(isset($_POST['submit']))
 	{
@@ -34,18 +34,18 @@ $error="Your current password is wrong";
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>CWMS | Admin Change Password</title>
+<title>CWMS | User Change Password</title>
 
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 
-<link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' />
-<link href="css/style.css" rel='stylesheet' type='text/css' />
-<link rel="stylesheet" href="css/morris.css" type="text/css"/>
-<link href="css/font-awesome.css" rel="stylesheet"> 
-<script src="js/jquery-2.1.4.min.js"></script>
+<link href="../admin/css/bootstrap.min.css" rel='stylesheet' type='text/css' />
+<link href="../admin/css/style.css" rel='stylesheet' type='text/css' />
+<link rel="stylesheet" href="../admin/css/morris.css" type="text/css"/>
+<link href="../admin/css/font-awesome.css" rel="stylesheet"> 
+<script src="../admin/js/jquery-2.1.4.min.js"></script>
 <link href='//fonts.googleapis.com/css?family=Roboto:700,500,300,100italic,100,400' rel='stylesheet' type='text/css'/>
 <link href='//fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-<link rel="stylesheet" href="css/icon-font.min.css" type='text/css' />
+<link rel="stylesheet" href="../admin/css/icon-font.min.css" type='text/css' />
 <script type="text/javascript">
 function valid()
 {
@@ -208,9 +208,11 @@ html, body {
 											toggle = !toggle;
 										});
 							</script>
-<script src="js/jquery.nicescroll.js"></script>
-<script src="js/scripts.js"></script>
-<script src="js/bootstrap.min.js"></script>
-   
+<!--js -->
+<script src="../admin/js/jquery.nicescroll.js"></script>
+<script src="../admin/js/scripts.js"></script>
+<!-- Bootstrap Core JavaScript -->
+<script src="../admin/js/bootstrap.min.js"></script>
+<!-- /Bootstrap Core JavaScript -->	   
 </body>
 </html>
