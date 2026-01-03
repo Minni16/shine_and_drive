@@ -2,6 +2,7 @@
 session_start();
 include('includes/config.php');
 include('includes/auth-check.php');
+include('includes/payment-check.php');
 ?>
 <!DOCTYPE HTML>
 <html>

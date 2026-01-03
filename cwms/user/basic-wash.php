@@ -152,9 +152,10 @@ include('includes/auth-check.php');
                 </ol>
 
                 <div class="container-fluid" style="padding: 20px;">
-                    <!-- First Row: Plan Description -->
+                    <!-- Package Card and Payment Form Side by Side -->
                     <div class="row">
-                        <div class="col-md-12">
+                        <!-- Left Column: Package Card -->
+                        <div class="col-md-6">
                             <div class="plan-description">
                                 <div class="plan-header">
                                     <h2>Basic Wash Plan</h2>
@@ -162,86 +163,67 @@ include('includes/auth-check.php');
                                         <span>Rs</span> 500
                                     </div>
                                     <p style="color: #666; font-size: 16px;">Perfect for regular maintenance and quick cleaning</p>
+                                    <p style="color: #999; font-size: 14px;">(15–20 minutes)</p>
                                 </div>
                                 <div class="plan-features">
-                                    <li><i class="fa fa-check-circle"></i> Seats Washing</li>
-                                    <li><i class="fa fa-check-circle"></i> Vacuum Cleaning</li>
-                                    <li><i class="fa fa-check-circle"></i> Exterior Cleaning</li>
-                                    <li><i class="fa fa-check-circle"></i> Basic Air Drying</li>
-                                    <li class="excluded"><i class="fa fa-times-circle"></i> Interior Wet Cleaning</li>
-                                    <li class="excluded"><i class="fa fa-times-circle"></i> Window Wiping</li>
-                                    <li class="excluded"><i class="fa fa-times-circle"></i> Waxing</li>
-                                    <li class="excluded"><i class="fa fa-times-circle"></i> Tire Shine</li>
+                                    <li><i class="fa fa-check-circle"></i> Exterior water wash</li>
+                                    <li><i class="fa fa-check-circle"></i> Shampoo + rinse</li>
+                                    <li><i class="fa fa-check-circle"></i> Tire & rim wash</li>
+                                    <li><i class="fa fa-check-circle"></i> Basic air drying</li>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- Second Row: Credit Form -->
-                    <div class="row">
-                        <div class="col-md-12">
+                        <!-- Right Column: eSewa Payment Form -->
+                        <div class="col-md-6">
                             <div class="credit-form">
-                                <h3><i class="fa fa-credit-card"></i> Payment Information</h3>
-                                <form method="post" action="add-booking.php">
-                                    <input type="hidden" name="packagetype" value="1">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Cardholder Name <span class="text-danger">*</span></label>
-                                                <input type="text" name="cardholder_name" class="form-control" required placeholder="John Doe">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Card Number <span class="text-danger">*</span></label>
-                                                <input type="text" name="card_number" class="form-control" required placeholder="1234 5678 9012 3456" maxlength="19" pattern="[0-9\s]{13,19}">
-                                            </div>
-                                        </div>
+                                <h3><i class="fa fa-credit-card"></i> Complete Payment</h3>
+                                <p style="color: #666; margin-bottom: 20px;">Pay securely using eSewa</p>
+                                
+                                <!-- eSewa Payment Form -->
+                                <form id="esewa-form" method="POST" action="https://uat.esewa.com.np/epay/main">
+                                    <input type="hidden" id="tAmt" name="tAmt" value="500">
+                                    <input type="hidden" id="amt" name="amt" value="500">
+                                    <input type="hidden" id="txAmt" name="txAmt" value="0">
+                                    <input type="hidden" id="psc" name="psc" value="0">
+                                    <input type="hidden" id="pdc" name="pdc" value="0">
+                                    <input type="hidden" id="scd" name="scd" value="EPAYTEST">
+                                    <input type="hidden" id="pid" name="pid" value="PKG1_<?php echo time(); ?>">
+                                    <input type="hidden" id="su" name="su" value="<?php echo (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://" . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']) . "/process-payment.php"; ?>">
+                                    <input type="hidden" id="fu" name="fu" value="<?php echo (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://" . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']) . "/basic-wash.php"; ?>">
+                                    <input type="hidden" name="package_type" value="1">
+                                    <input type="hidden" name="package_amount" value="500">
+                                    
+                                    <div class="form-group">
+                                        <label>Package Selected</label>
+                                        <input type="text" class="form-control" value="Basic Wash - Rs 500" readonly>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label>Expiry Month <span class="text-danger">*</span></label>
-                                                <select name="expiry_month" class="form-control" required>
-                                                    <option value="">Month</option>
-                                                    <?php for($i=1; $i<=12; $i++): ?>
-                                                        <option value="<?php echo str_pad($i, 2, '0', STR_PAD_LEFT); ?>"><?php echo str_pad($i, 2, '0', STR_PAD_LEFT); ?></option>
-                                                    <?php endfor; ?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label>Expiry Year <span class="text-danger">*</span></label>
-                                                <select name="expiry_year" class="form-control" required>
-                                                    <option value="">Year</option>
-                                                    <?php for($i=date('Y'); $i<=date('Y')+10; $i++): ?>
-                                                        <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-                                                    <?php endfor; ?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label>CVV <span class="text-danger">*</span></label>
-                                                <input type="text" name="cvv" class="form-control" required placeholder="123" maxlength="4" pattern="[0-9]{3,4}">
-                                            </div>
-                                        </div>
+                                    
+                                    <div class="form-group">
+                                        <label>Total Amount</label>
+                                        <input type="text" class="form-control" value="Rs 500" readonly style="font-size: 24px; font-weight: bold; color: #667eea;">
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label>Billing Address <span class="text-danger">*</span></label>
-                                                <textarea name="billing_address" class="form-control" rows="3" required placeholder="Enter your billing address"></textarea>
-                                            </div>
-                                        </div>
+                                    
+                                    <div class="form-group text-center mt-4">
+                                        <button type="submit" class="btn-pay">
+                                            <i class="fa fa-lock"></i> Pay with eSewa
+                                        </button>
+                                        <p style="margin-top: 15px; font-size: 12px; color: #999;">
+                                            <i class="fa fa-shield"></i> Secure payment powered by eSewa
+                                        </p>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-12 text-center">
-                                            <button type="submit" name="book" class="btn-pay">
-                                                <i class="fa fa-lock"></i> Pay Rs 500 & Complete Booking
-                                            </button>
-                                        </div>
+                                </form>
+                                
+                                <!-- Alternative: Direct payment processing (for testing) -->
+                                <form method="post" action="process-payment.php" style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #eee;">
+                                    <input type="hidden" name="package_type" value="1">
+                                    <input type="hidden" name="amount" value="500">
+                                    <input type="hidden" name="esewa_submit" value="1">
+                                    <div class="form-group text-center">
+                                        <button type="submit" class="btn-pay" style="background: #28a745;">
+                                            <i class="fa fa-check"></i> Complete Payment (Test Mode)
+                                        </button>
+                                        <p style="margin-top: 10px; font-size: 11px; color: #999;">Use this for testing without eSewa</p>
                                     </div>
                                 </form>
                             </div>

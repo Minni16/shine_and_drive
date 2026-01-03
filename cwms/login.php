@@ -25,8 +25,20 @@ if (isset($_POST['login'])) {
                 // Admin goes to admin dashboard
                 echo "<script type='text/javascript'> document.location = 'admin/dashboard.php'; </script>";
             } else {
-                // Regular users go to user dashboard
-                echo "<script type='text/javascript'> document.location = 'user/dashboard.php'; </script>";
+                // Regular users: redirect back to referring page or index.php
+                $redirect_url = 'index.php';
+                if (isset($_SESSION['redirect_after_login']) && !empty($_SESSION['redirect_after_login'])) {
+                    $redirect_url = $_SESSION['redirect_after_login'];
+                    unset($_SESSION['redirect_after_login']);
+                } elseif (isset($_SERVER['HTTP_REFERER']) && !empty($_SERVER['HTTP_REFERER'])) {
+                    // Extract the path from the referer URL
+                    $referer = parse_url($_SERVER['HTTP_REFERER'], PHP_URL_PATH);
+                    // Only redirect to same domain pages
+                    if (strpos($referer, $_SERVER['HTTP_HOST']) !== false || strpos($referer, '/') === 0) {
+                        $redirect_url = basename($referer);
+                    }
+                }
+                echo "<script type='text/javascript'> document.location = '" . htmlspecialchars($redirect_url, ENT_QUOTES) . "'; </script>";
             }
         } else {
             echo "<script>alert('Invalid Details');</script>";
@@ -174,6 +186,17 @@ if (isset($_POST['login'])) {
     <div class="container">
         <h2>User Login</h2>
         <form method="post" action="login.php">
+            <?php 
+            // Store the referring page for redirect after login
+            if (isset($_GET['redirect']) && !empty($_GET['redirect'])) {
+                $_SESSION['redirect_after_login'] = $_GET['redirect'];
+            } elseif (isset($_SERVER['HTTP_REFERER']) && !empty($_SERVER['HTTP_REFERER'])) {
+                $referer = parse_url($_SERVER['HTTP_REFERER'], PHP_URL_PATH);
+                if (basename($referer) != 'login.php') {
+                    $_SESSION['redirect_after_login'] = basename($referer);
+                }
+            }
+            ?>
             <div class="form-group">
                 <label>Username:</label>
                 <input type="text" name="username" required placeholder="Enter your username">

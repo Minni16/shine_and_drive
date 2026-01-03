@@ -3,6 +3,7 @@ session_start();
 error_reporting(0);
 include('includes/config.php');
 include('includes/auth-check.php');
+include('includes/payment-check.php');
 ?> 
 
 

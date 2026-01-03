@@ -336,11 +336,11 @@ else
                             </div>
                             <div class="price-footer">
                                 <?php if (isset($_SESSION['alogin'])): ?>
-                                    <a class="btn btn-custom btn-block" data-toggle="modal" data-target="#myModal" data-package="1" data-package-name="Basic Cleaning (Rs500)">
+                                    <a href="user/basic-wash.php" class="btn btn-custom btn-block">
                                         <i class="fas fa-calendar-check"></i> Get Now
                                     </a>
                                 <?php else: ?>
-                                    <a href="login.php" class="btn btn-custom btn-block">
+                                    <a href="login.php?redirect=index.php" class="btn btn-custom btn-block">
                                         <i class="fas fa-sign-in-alt"></i> Get Now
                                     </a>
                                 <?php endif; ?>
@@ -380,11 +380,11 @@ else
                             </div>
                             <div class="price-footer">
                                 <?php if (isset($_SESSION['alogin'])): ?>
-                                    <a class="btn btn-custom btn-block featured-btn" data-toggle="modal" data-target="#myModal" data-package="2" data-package-name="Premium Cleaning (Rs1500)">
+                                    <a href="user/standard-care.php" class="btn btn-custom btn-block featured-btn">
                                         <i class="fas fa-calendar-check"></i> Get Now
                                     </a>
                                 <?php else: ?>
-                                    <a href="../cwms/admin/index.php" class="btn btn-custom btn-block featured-btn">
+                                    <a href="login.php?redirect=index.php" class="btn btn-custom btn-block featured-btn">
                                         <i class="fas fa-sign-in-alt"></i> Get Now
                                     </a>
                                 <?php endif; ?>
@@ -424,11 +424,11 @@ else
                             </div>
                             <div class="price-footer">
                                 <?php if (isset($_SESSION['alogin'])): ?>
-                                    <a class="btn btn-custom btn-block" data-toggle="modal" data-target="#myModal" data-package="3" data-package-name="Complex Cleaning (Rs2500)">
+                                    <a href="user/premium-treatment.php" class="btn btn-custom btn-block">
                                         <i class="fas fa-calendar-check"></i> Get Now
                                     </a>
                                 <?php else: ?>
-                                    <a href="login.php" class="btn btn-custom btn-block">
+                                    <a href="login.php?redirect=index.php" class="btn btn-custom btn-block">
                                         <i class="fas fa-sign-in-alt"></i> Get Now
                                     </a>
                                 <?php endif; ?>
