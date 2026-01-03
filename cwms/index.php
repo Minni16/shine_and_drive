@@ -318,7 +318,7 @@ else
                     <div class="col-lg-4 col-md-6 mb-4">
                         <div class="price-item">
                             <div class="price-header">
-                                <h3>Quick Wash</h3>
+                                <h3>Basic Wash</h3>
                                 <div class="price-amount">
                                     <span class="currency">Rs</span>
                                     <span class="amount">500</span>
@@ -341,7 +341,7 @@ else
                                     </a>
                                 <?php else: ?>
                                     <a href="login.php" class="btn btn-custom btn-block">
-                                        <i class="fas fa-sign-in-alt"></i> Login to Book
+                                        <i class="fas fa-sign-in-alt"></i> Book Now
                                     </a>
                                 <?php endif; ?>
                             </div>
@@ -355,7 +355,7 @@ else
                                 <i class="fas fa-star"></i> Most Popular
                             </div>
                             <div class="price-header">
-                                <h3>Shine Care</h3>
+                                <h3>Standard Care</h3>
                                 <div class="price-amount">
                                     <span class="currency">Rs</span>
                                     <span class="amount">1500</span>
@@ -380,7 +380,7 @@ else
                                     </a>
                                 <?php else: ?>
                                     <a href="../cwms/admin/index.php" class="btn btn-custom btn-block featured-btn">
-                                        <i class="fas fa-sign-in-alt"></i> Login to Book
+                                        <i class="fas fa-sign-in-alt"></i> Book Now
                                     </a>
                                 <?php endif; ?>
                             </div>
@@ -418,7 +418,7 @@ else
                                     </a>
                                 <?php else: ?>
                                     <a href="login.php" class="btn btn-custom btn-block">
-                                        <i class="fas fa-sign-in-alt"></i> Login to Book
+                                        <i class="fas fa-sign-in-alt"></i> Book Now
                                     </a>
                                 <?php endif; ?>
                             </div>
@@ -464,9 +464,9 @@ else
                                 <label for="packagetype"><i class="fas fa-box"></i> Package Type <span class="text-danger">*</span></label>
                                 <select name="packagetype" id="packagetype" required class="form-control">
                                     <option value="">Select Package Type</option>
-                                    <option value="1">Quick Wash (Rs500)</option>
-                                    <option value="2">Shine Care (Rs1500)</option>
-                                    <option value="3">Ultimate Spa (Rs2500)</option>
+                                    <option value="1">Basic Wash (Rs500)</option>
+                                    <option value="2">Standard Care (Rs1500)</option>
+                                    <option value="3">Premium Treatment (Rs2500)</option>
                                 </select>
                             </div>
                             
